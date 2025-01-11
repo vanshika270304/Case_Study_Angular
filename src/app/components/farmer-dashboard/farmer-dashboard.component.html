@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <app-header></app-header>
+  
+   <!-- Welcome Section -->
+<section class="p-8 bg-gradient-to-b from-green-100 to-green-300 shadow-md rounded-lg">
+  <div class="text-center space-y-4">
+    <!-- Greeting -->
+    <h1 class="text-4xl font-extrabold text-green-800">
+      Hello, Welcome Back! <span class="text-green-600">{{ farmerData.name }}</span> 🌱
+    </h1>
+    <p class="text-lg text-gray-700 italic">
+      "The future of farming lies in the hands of those who cultivate with care."
+    </p>
+    <!-- Profile Picture with Dynamic Glow -->
+    <div class="relative mx-auto mt-6 w-28 h-28">
+      <div
+        class="absolute inset-0 bg-green-400 opacity-20 rounded-full blur-lg -z-10 animate-pulse"
+      ></div>
+      <img
+        src="https://www.agrifarming.in/wp-content/uploads/2020/10/wheat-1235854_1920.jpg"
+        alt="Profile Picture"
+        class="w-full h-full rounded-full border-4 border-green-700 shadow-lg"
+      />
+    </div>
+    <!-- Interaction Button -->
+    <div class="mt-6">
+      <button
+        class="px-6 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 hover:scale-105 transform transition duration-300"
+      >
+        Explore Your Dashboard
+      </button>
+    </div>
+    <!-- Decorative Divider -->
+    <div class="mt-6 flex justify-center items-center">
+      <span class="bg-green-400 h-px w-20"></span>
+      <span class="mx-4 text-green-700 font-semibold text-sm">Empowering Farmers</span>
+      <span class="bg-green-400 h-px w-20"></span>
+    </div>
+  </div>
+</section>
+
+  
+    <!-- Metrics Overview -->
+    <section class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white p-4 rounded shadow text-center">
+        <h2 class="text-xl font-semibold">Total Crops</h2>
+        <p class="text-4xl font-bold text-green-600">5</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow text-center">
+        <h2 class="text-xl font-semibold">Active Orders</h2>
+        <p class="text-4xl font-bold text-green-600">10</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow text-center">
+        <h2 class="text-xl font-semibold">Total Revenue</h2>
+        <p class="text-4xl font-bold text-green-600">₹2,000</p>
+      </div>
+    </section>
+  
+    <!-- Quick Actions -->
+<section class="p-8 bg-gradient-to-b from-white to-green-100 shadow-md rounded-lg mt-6">
+  <h2 class="text-2xl font-extrabold text-green-700 mb-6 text-center">
+    Quick Actions
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+    <!-- Add New Crop -->
+    <button
+      class="bg-green-600 text-white py-4 px-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:bg-green-700"
+      (click)="navigateToCrops()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 mx-auto mb-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 4v16m8-8H4"
+        />
+      </svg>
+      Add New Crop
+    </button>
+
+    <!-- View Crops -->
+    <button
+      class="bg-green-600 text-white py-4 px-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:bg-green-700"
+    (click)="navigateToCrops()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 mx-auto mb-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+      View Crops
+    </button>
+
+    <!-- View Orders -->
+    <button
+      class="bg-green-600 text-white py-4 px-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:bg-green-700"
+      (click)="navigateToOrders()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 mx-auto mb-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3 10h11m8-4H6m6 8H6m6 4H6m6-4v8m8-4v8m0-4h-6"
+        />
+      </svg>
+      View Orders
+    </button>
+
+    <!-- Edit Profile -->
+    <button
+      class="bg-green-600 text-white py-4 px-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:bg-green-700"
+      (click)="navigateToProfile()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 mx-auto mb-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5.121 17.804a1.373 1.373 0 01-.424-1.425L7.636 5.4a1.373 1.373 0 012.274-.475l2.662 3.203a1.373 1.373 0 00.808.478l5.442.905a1.373 1.373 0 01.998 1.92l-2.533 5.066a1.373 1.373 0 00.223 1.373l1.08 1.296"
+        />
+      </svg>
+      Edit Profile
+    </button>
+  </div>
+</section>
+
+  
+    <!-- Announcements Section -->
+    <section class="p-6 bg-gray-50 shadow-md mt-4">
+      <h2 class="text-xl font-bold mb-4">Announcements & Tips</h2>
+      <ul class="space-y-2">
+        <li class="bg-white p-3 rounded shadow">Crop prices are rising! Consider adding wheat to your offerings.</li>
+        <li class="bg-white p-3 rounded shadow">Save water with efficient irrigation methods this summer.</li>
+        <li class="bg-white p-3 rounded shadow">Explore organic farming techniques to increase your crop's market value.</li>
+        <li class="bg-white p-3 rounded shadow">Protect your crops from pests with eco-friendly pest control solutions.</li>
+        <li class="bg-white p-3 rounded shadow">Diversify your crops to ensure a steady income throughout the year.</li>
+
+      </ul>
+    </section>
+  
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>
+  

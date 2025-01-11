@@ -1,0 +1,16 @@
+<header class="bg-green-600 text-white p-4 flex justify-between items-center shadow">
+    <div class="text-lg font-bold">Farmer's Dashboard</div>
+    <nav>
+      <ul class="flex space-x-4">
+        <li><a class="hover:underline" (click)="navigateToDashboard()">Home</a></li>
+        <li><a class="hover:underline" (click)="navigateToCrops()">Crops</a></li>
+        <li><a h class="hover:underline" (click)="navigateToOrders()">Orders</a></li>
+        <li>
+          <a class="hover:underline" (click)="navigateToProfile()">
+            Profile
+          </a>
+        </li>
+        <li><a  class="hover:underline" (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>

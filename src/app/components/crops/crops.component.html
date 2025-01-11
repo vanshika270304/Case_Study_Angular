@@ -1,0 +1,182 @@
+<app-header></app-header>
+
+<div class="min-h-screen bg-gradient-to-t from-green-50 to-green-200 p-8">
+  <!-- Page Header -->
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-4xl font-bold text-green-800 tracking-tight">Crops Management</h1>
+    <button
+      class="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transform hover:scale-105 transition duration-300"
+      (click)="openModal()"
+    >
+      + Add Crop
+    </button>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-lg shadow-xl border border-green-300">
+      <h2 class="text-lg font-semibold text-green-700">Total Crops</h2>
+      <p class="text-4xl font-bold text-green-900">88</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-xl border border-green-300">
+      <h2 class="text-lg font-semibold text-green-700">Crops Sold</h2>
+      <p class="text-4xl font-bold text-green-900">45</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-xl border border-green-300">
+      <h2 class="text-lg font-semibold text-green-700">Crops in Season</h2>
+      <p class="text-4xl font-bold text-green-900">22</p>
+    </div>
+  </div>
+
+  <!-- Crops Table -->
+  <div class="bg-white shadow-xl rounded-lg p-6 overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Quantity(kgs)</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Price/Unit(₹)</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Soil Type</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Harvest Date</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+          <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr *ngFor="let crop of crops" class="hover:bg-gray-100">
+          <td class="px-4 py-3">{{ crop.name }}</td>
+          <td class="px-4 py-3">{{ crop.quantity }}</td>
+          <td class="px-4 py-3">{{ crop.pricePerUnit }}</td>
+          <td class="px-4 py-3">{{ crop.soilType }}</td>
+          <td class="px-4 py-3">{{ crop.dateOfHarvest }}</td>
+          <td class="px-4 py-3">
+            <span
+              [ngClass]="{
+                'bg-green-200 text-green-800': crop.status === 'In Season',
+                'bg-yellow-200 text-yellow-800': crop.status === 'Available',
+                'bg-red-200 text-red-800': crop.status === 'Sold Out'
+              }"
+              class="px-3 py-1 rounded-full text-sm font-medium"
+            >
+              {{ crop.status }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-center flex gap-2 justify-center">
+            <button
+              class="bg-yellow-500 text-white px-3 py-2 rounded shadow hover:bg-yellow-600 transform hover:scale-105 transition duration-300"
+              (click)="openModal(crop)"
+              matTooltip="Edit Crop"
+            >
+              Edit
+            </button>
+            <button
+              class="bg-red-600 text-white px-3 py-2 rounded shadow hover:bg-red-700 transform hover:scale-105 transition duration-300"
+              (click)="deleteCrop(crop.id!)"
+              matTooltip="Delete Crop"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div
+    *ngIf="isModalOpen"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white rounded-lg p-8 w-96 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-green-700">
+        {{ isEditing ? 'Edit Crop' : 'Add New Crop' }}
+      </h2>
+      <form [formGroup]="cropForm" (ngSubmit)="saveCrop()">
+        <div class="mb-4">
+          <label class="block text-gray-700">Crop Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
+          />
+          <div *ngIf="f['name'].touched && f['name'].invalid" class="text-red-500 text-sm">
+            Crop name is required.
+          </div>
+          <div *ngIf="f['name'].errors?.['pattern']" class="text-red-500 text-sm">
+            Crop name can only contain letters and spaces
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Quantity(in Kgs)</label>
+          <input
+            type="number"
+            formControlName="quantity"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
+          />
+          <div *ngIf="f['quantity'].touched && f['quantity'].errors?.['required']" class="text-red-500 text-sm">
+            Quantity is required.
+          </div>
+          <div *ngIf="f['quantity'].errors?.['min']" class="text-red-500 text-sm">
+            Quantity must be greater than 0.
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Price/Unit(in ₹)</label>
+          <input
+            type="number"
+            formControlName="pricePerUnit"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
+          />
+          <div *ngIf="f['pricePerUnit'].touched && f['pricePerUnit'].errors?.['required']" class="text-red-500 text-sm">
+            Price is required.
+          </div>
+          <div *ngIf="f['pricePerUnit'].errors?.['min']" class="text-red-500 text-sm">
+            Price per unit must be greater than 0.
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Soil Type</label>
+          <input
+            type="text"
+            formControlName="soilType"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
+          />
+          <div *ngIf="f['soilType'].touched && f['soilType'].invalid" class="text-red-500 text-sm">
+            Soil type is required.
+          </div>
+          <div *ngIf="f['name'].errors?.['pattern']" class="text-red-500 text-sm">
+            Soil type can only contain letters and spaces
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Date of Harvest</label>
+          <input
+            type="date"
+            formControlName="dateOfHarvest"
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
+          />
+          <div *ngIf="f['dateOfHarvest'].touched && f['dateOfHarvest'].errors?.['required']" class="text-red-500 text-sm">
+            Date of harvest is required.
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button
+            type="button"
+            class="bg-gray-400 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-500 mr-2"
+            (click)="closeModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700"
+          >
+            {{ isEditing ? 'Update Crop' : 'Add Crop' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

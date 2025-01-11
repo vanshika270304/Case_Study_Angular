@@ -1,0 +1,57 @@
+<div class="min-h-screen bg-gradient-to-r from-[#eafaf1] to-[#d4f5e7] flex flex-col items-center p-8">
+    <div class="w-full max-w-3xl bg-white rounded-lg shadow-lg p-6">
+      <div class="flex items-center justify-between border-b pb-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Profile</h1>
+        <button (click)="goToDashboard()" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition">
+          Back to Dashboard
+        </button>
+      </div>
+  
+      <!-- Validation Error Message -->
+      <div *ngIf="errorMessage" class="text-red-500 text-sm mb-4">
+        {{ errorMessage }}
+      </div>
+  
+      <!-- Profile Details -->
+      <div class="space-y-4">
+        <div class="flex justify-between items-center">
+          <p class="text-lg font-medium text-gray-600">Name:</p>
+          <p *ngIf="!isEditing" class="text-lg text-gray-800">{{ userData?.name }}</p>
+          <input *ngIf="isEditing" type="text" [(ngModel)]="userData.name" class="border rounded-md px-4 py-2 w-full max-w-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+  
+        <div class="flex justify-between items-center">
+          <p class="text-lg font-medium text-gray-600">Email:</p>
+          <p *ngIf="!isEditing" class="text-lg text-gray-800">{{ userData?.email }}</p>
+          <input *ngIf="isEditing" type="email" [(ngModel)]="userData.email" class="border rounded-md px-4 py-2 w-full max-w-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+  
+        <div class="flex justify-between items-center">
+          <p class="text-lg font-medium text-gray-600">Phone:</p>
+          <p *ngIf="!isEditing" class="text-lg text-gray-800">{{ userData?.number }}</p>
+          <input *ngIf="isEditing" type="text" [(ngModel)]="userData.number" class="border rounded-md px-4 py-2 w-full max-w-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+  
+        <div class="flex justify-between items-center">
+          <p class="text-lg font-medium text-gray-600">Role:</p>
+          <p class="text-lg text-gray-800 capitalize">{{ userData?.role }}</p>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="mt-8 flex justify-end space-x-4">
+        <button *ngIf="!isEditing" (click)="toggleEdit()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          Edit
+        </button>
+  
+        <button *ngIf="isEditing" (click)="saveProfile()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+          Save
+        </button>
+  
+        <button *ngIf="isEditing" (click)="cancelEdit()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,110 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Create Your Account</h2>
+      <p class="text-gray-600 text-center mb-6">
+        Already have an account? 
+        <a (click)="navigateToLogin()" class="text-blue-600 hover:underline">Login</a>
+      </p>
+      <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="space-y-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-gray-700 font-medium mb-1">Full Name</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="John Doe"
+          />
+          <small *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-red-500">
+            Name must be at least 3 characters long.
+          </small>
+        </div>
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="example@mail.com"
+          />
+          <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-red-500">
+            Please enter a valid email.
+          </small>
+        </div>
+        <!-- Phone Number -->
+        <div>
+          <label for="number" class="block text-gray-700 font-medium mb-1">Phone Number</label>
+          <input
+            id="number"
+            type="text"
+            formControlName="number"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="9876543210"
+          />
+          <small *ngIf="signupForm.get('number')?.invalid && signupForm.get('number')?.touched" class="text-red-500">
+            Phone number must be 10 digits and start with 6, 7, 8, or 9.
+          </small>
+        </div>
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="••••••••"
+          />
+          <small *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-red-500">
+            Password must contain at least 8 characters, one uppercase letter, one number, and one special character.
+          </small>
+        </div>
+        <!-- Confirm Password -->
+        <div>
+          <label for="confirmPassword" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="••••••••"
+          />
+          <small *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="text-red-500">
+            Confirm password must match the password.
+          </small>
+        </div>
+        <!-- Role -->
+        <div>
+          <label for="role" class="block text-gray-700 font-medium mb-1">Role</label>
+          <select
+            id="role"
+            formControlName="role"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="" disabled>Select Role</option>
+            <option value="farmer">Farmer</option>
+            <option value="dealer">Dealer</option>
+          </select>
+          <small *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched" class="text-red-500">
+            Please select a role.
+          </small>
+        </div>
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="text-red-500 text-sm text-center">
+          {{ errorMessage }}
+        </div>
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="signupForm.invalid"
+          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition duration-200 disabled:opacity-50"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
+  
