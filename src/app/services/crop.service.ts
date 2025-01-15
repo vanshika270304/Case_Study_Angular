@@ -26,6 +26,11 @@ export class CropService {
     deleteCrop(cropId: string): Observable<void> {
       return this.http.delete<void>(`${this.baseUrl}/${cropId}`);
     }
+
+    //this is for dealer dashboard
+    getCrops(): Observable<any> {
+      return this.http.get(`${this.baseUrl}/available`);
+    }
   }
 
  

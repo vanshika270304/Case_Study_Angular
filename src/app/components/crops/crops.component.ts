@@ -23,10 +23,10 @@ export class CropsComponent implements OnInit {
 
   constructor(private cropsService: CropService, private fb: FormBuilder) {
     this.cropForm = this.fb.group({
-      name: ['', Validators.required,Validators.minLength(3),Validators.pattern('^[a-zA-Z ]+$')],
+      name: ['', [Validators.required,Validators.minLength(3)]],
       quantity: [1, [Validators.required, Validators.min(1)]],
       pricePerUnit: [0.1, [Validators.required, Validators.min(0.1)]],
-      soilType: ['', Validators.required,Validators.pattern('^[a-zA-Z ]+$')],
+      soilType: ['', [Validators.required,Validators.pattern('^[a-zA-Z ]+$')]],
       dateOfHarvest: ['', Validators.required]
     });
   }

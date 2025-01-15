@@ -7,6 +7,8 @@ import { DealerDashboardComponent } from './components/dealer-dashboard/dealer-d
 import { ProfileComponent } from './components/profile/profile.component';
 import { CropsComponent } from './components/crops/crops.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,5 +19,7 @@ export const routes: Routes = [
   {path:  'profile', component:ProfileComponent},
   {path:'crops',component:CropsComponent},
   {path: 'orders', component: OrdersComponent},
+  {path:'cart',component:CartComponent},
+  {path:'checkout',component:CheckoutComponent},
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

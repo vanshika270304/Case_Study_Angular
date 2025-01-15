@@ -87,6 +87,14 @@ export class ProfileComponent implements OnInit {
   }
 
   goToDashboard() {
-    this.router.navigate(['/farmer-dashboard']);
+    if(this.userData.role === 'dealer')
+    {
+      this.router.navigate(['/dealer-dashboard']);
+
+    }
+    else
+    {
+      this.router.navigate(['/farmer-dashboard']);
+    }
   }
 }

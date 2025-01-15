@@ -91,7 +91,9 @@
       <h2 class="text-2xl font-semibold mb-4 text-green-700">
         {{ isEditing ? 'Edit Crop' : 'Add New Crop' }}
       </h2>
+
       <form [formGroup]="cropForm" (ngSubmit)="saveCrop()">
+        
         <div class="mb-4">
           <label class="block text-gray-700">Crop Name</label>
           <input
@@ -102,10 +104,8 @@
           <div *ngIf="f['name'].touched && f['name'].invalid" class="text-red-500 text-sm">
             Crop name is required.
           </div>
-          <div *ngIf="f['name'].errors?.['pattern']" class="text-red-500 text-sm">
-            Crop name can only contain letters and spaces
-          </div>
         </div>
+        
         <div class="mb-4">
           <label class="block text-gray-700">Quantity(in Kgs)</label>
           <input
@@ -120,6 +120,7 @@
             Quantity must be greater than 0.
           </div>
         </div>
+
         <div class="mb-4">
           <label class="block text-gray-700">Price/Unit(in ₹)</label>
           <input
@@ -143,9 +144,6 @@
           />
           <div *ngIf="f['soilType'].touched && f['soilType'].invalid" class="text-red-500 text-sm">
             Soil type is required.
-          </div>
-          <div *ngIf="f['name'].errors?.['pattern']" class="text-red-500 text-sm">
-            Soil type can only contain letters and spaces
           </div>
         </div>
         <div class="mb-4">

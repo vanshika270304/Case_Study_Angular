@@ -1,0 +1,95 @@
+<app-header-dealer></app-header-dealer>
+<div class="cart-container max-w-4xl mx-auto p-6 bg-gray-50 shadow-md rounded-lg mt-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Cart</h2>
+  
+    <!-- Empty Cart -->
+    <div *ngIf="cartItems.length === 0" class="text-center">
+      <p class="text-gray-600 text-lg mb-4">Your cart is empty.</p>
+      <button
+        (click)="navigateToCrops()"
+        class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg shadow-md transition-all"
+      >
+        Browse Crops
+      </button>
+    </div>
+  
+    <!-- Cart Items -->
+    <div *ngIf="cartItems.length > 0" class="space-y-6">
+      <div *ngFor="let item of cartItems" class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-between">
+        <!-- Product Info -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">{{ item.name }}</h3>
+          <p class="text-gray-600">₹{{ item.pricePerUnit }} per unit</p>
+          <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+        </div>
+  
+        <!-- Controls -->
+        <div class="flex items-center space-x-4">
+          <!-- Quantity Controls -->
+          <div class="flex items-center border border-gray-300 rounded-md">
+            <button
+              class="px-2 py-1 bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
+              (click)="decreaseQuantity(item)"
+            >
+              -
+            </button>
+            <span class="px-4 py-1">{{ item.quantity }}</span>
+            <button
+              class="px-2 py-1 bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
+              (click)="increaseQuantity(item)"
+            >
+              +
+            </button>
+          </div>
+  
+          <!-- Delete Button -->
+          <button
+            class="text-red-500 hover:text-red-600 transition"
+            (click)="confirmDelete(item)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Total Amount -->
+    <div *ngIf="cartItems.length > 0" class="mt-6 border-t pt-4">
+      <h3 class="text-lg font-semibold text-gray-800">
+        Total: <span class="text-green-600">₹{{ totalAmount }}</span>
+      </h3>
+      <button
+        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md mt-4 transition-all"
+      (click)="checkout()">
+        Checkout
+      </button>
+    </div>
+  
+    <!-- Confirm Delete Modal -->
+    <div
+      *ngIf="itemToDelete"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Confirm Removal</h2>
+        <p class="text-gray-600">Are you sure you want to remove <strong>{{ itemToDelete.name }}</strong> from the cart?</p>
+        <div class="mt-4 flex justify-end space-x-4">
+          <button
+            class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg"
+            (click)="cancelDelete()"
+          >
+            Cancel
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+            (click)="deleteItem(itemToDelete.id)"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+  ```
+  
